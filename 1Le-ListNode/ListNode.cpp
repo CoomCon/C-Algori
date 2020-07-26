@@ -107,6 +107,26 @@ pListNode reverseK(pListNode head, int k)
 }
 
 
+//点（.）是用于结构体变量访问成员，
+//箭头（->）是用于结构体指针访问成员。
+// 该cpp中创建的都是指针 都用箭头
+bool ListInter(pListNode a,pListNode b)
+{
+// 参考
+// 作者：reals
+// 链接：https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/tu-jie-xiang-jiao-lian-biao-by-user7208t/
+// 来源：力扣（LeetCode）
+// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+    
+    if (a == NULL || b == NULL) return NULL;
+    pListNode pA = a, pB = b;
+    while (pA != pB) {
+        pA = pA == NULL ? b : pA->next;
+        pB = pB == NULL ? a : pB->next;
+    }
+    return pA; //不想交返回 NULL
+}
+
 
 
 int main()
