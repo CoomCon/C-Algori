@@ -12,6 +12,7 @@
             "request": "launch",
             "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
             "args": [],
+            "targetArchitecture": "X86_64",
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

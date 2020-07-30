@@ -124,10 +124,8 @@ bool ListInter(pListNode a,pListNode b)
         pA = pA == NULL ? b : pA->next;
         pB = pB == NULL ? a : pB->next;
     }
-    return pA; //不想交返回 NULL
+    return pA; //不想交返回NULL
 }
-
-
 
 int main()
 {
