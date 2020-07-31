@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdio.h>
 #include <string>
 #include <sstream>
 #include <cstring>
@@ -7,87 +6,83 @@
 using namespace std;
 
 
-#define N 1100
+#define N 5
 #define INF 0x3f3f3f
-int map[N][N];
-int d[N];
-int visit[N];
-int n;
 
+int dis[N];
+bool visit[N];
+int pre[N];
 
-// int main()
-// {
-//     int Node, Edge;
-//     string line;
-//     getline(cin, line);
-//     stringstream ss(line);
-//     ss >> Node;
-//     ss >> Edge;
-
-//     return 0;
-// }
-
-
-// int min(int a, int b)
-// {
-// 	if (a > b)
-// 		a = b;
-// 	return a;
-// }
-
-void Dijkstra(int x)//所有点到1的最短路径
+// void Dijkstra(int s) //建表过程 ,建立图中所有点与s的最短路径
+int Dijkstra(int s,int e,int map[N][N])//s->e的最短路径
 {
-	memset(visit, 0, sizeof(visit));
-	int i, j;
-	for (i = 1; i <= n; i++)
-	{
-		d[i] = map[x][i];
-	}
-	for (i = 1; i <= n; i++)
-	{
-		int min_cost = -1;
-		int index;
-		for (j = 1; j <= n; j++)
-		{
-			if (visit[j] == 0 && d[j] > min_cost)
-			{
-				min_cost = d[j];
-				//	printf("%d\n",d[j]);
-				index = j;
-			}
-		}
-		visit[index] = 1;
-		//	printf("%d\n\n\n",index);
-		for (j = 1; j <= n; j++)
-		{
-			if (visit[j] == 0 && d[j] < min(map[index][j], min_cost))
-			{
-				d[j] = min(map[index][j], min_cost);
+	memset(visit, false, sizeof(visit));
+	memset(dis, INF, sizeof(dis));
+	memset(pre, -1, sizeof(pre));
 
+	dis[s] = 0;
+
+	for (int i = 0; i < N; i++)
+	{
+		dis[i] = map[s][i];
+		pre[i] = s;
+	}
+	//
+
+	//建表操作
+	for (int i = 0; i < N; i++)
+	{
+		int distemp = INF;
+		int indextemp;
+		//找一个最近点 遍历所有点
+		for (int j = 0; j < N; j++)
+		{
+			if ( !visit[j] && dis[j] < distemp)
+			{
+				distemp = dis[j];
+				
+				indextemp = j;
+			}
+		}
+		visit[indextemp] = true; //标记访问过
+
+		//	第二次遍历 目的是优化
+		for (int j = 0; j < N; j++) 
+		{
+			if (!visit[j] && dis[j] > map[indextemp][j] + distemp) //言外一直 a->d的直接距离 大于 a->index->d
+			{
+				dis[j] = map[indextemp][j] + distemp;
+				pre[j] = indextemp;//前驱点更新 
 			}
 		}
 	}
-	printf("%d\n\n", d[n]);      //输出最终节点与首节点之间的最小距离
+	//所有遍历完，表就建好了，有用的主要是前驱表pre[]和距离表dis[]
+	return dis[e];
 }
 
+void prin(int i,int s)
+{
+	cout << pre[i] << "<-";
+	if(pre[i]!=s)
+		prin(pre[i],s);
+}
 int main()
 {
-	int i, j, m, k, l, u, v, w;
-	int T, t = 0;
-	scanf("%d", &T);     //T个测试
-	while (T--)           
-	{ 
-		t++;             //输出例子
-		scanf("%d%d", &n, &m);              //交叉口，和最大承重量。实际上就是节点和边的权重
-		memset(map, 0, sizeof(map));        //清空背包
-		for (i = 1; i <= m; i++)
+	int map[5][5] =
 		{
-			scanf("%d%d%d", &u, &v, &w);   //依次输入节点，节点，这两个节点之间的权重
-			map[u][v] = map[v][u] = w;
-		}
-		printf("Scenario #%d:\n", t);
-		Dijkstra(1);                    //从第几号节点开始
-	}
+			{0, 6, INF, 1, INF}, //不直接相连的点距离就是无穷大
+			{6, 0, 5, 2, 2},
+			{INF, 5, 0, 5, INF},
+			{1, 2, INF, 0, 1},
+			{INF, 2, 5, 1, 0},
+		};
+
+	int res = Dijkstra(0,2,map); 
+
+	cout << res << endl;
+
+	cout << "2";
+	prin(2,0);
 	return 0;
 }
 
