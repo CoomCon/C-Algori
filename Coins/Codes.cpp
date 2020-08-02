@@ -6,7 +6,7 @@ using namespace std;
 //自下而上
 int dp(vector<int> &coins,int amount)
 {
-    
+    coins.erase(0);
 }
 int findcoins2(vector<int> &coins,int amount)
 { 
@@ -49,7 +49,7 @@ int main()
         b -= num[i] * a[i];
     }
     //贪心+回溯
-
+    return 0;
     ///
 
 
