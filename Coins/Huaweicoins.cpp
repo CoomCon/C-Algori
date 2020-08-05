@@ -28,13 +28,36 @@ int findcoins(vector<int> coins,vector<int> nums,int amount)
 
 
 
+int findcoinsT(vector<int> coins,vector<int> nums,int amount)
+{
+    //五件商品，五个数组 是确定的 所以比较简单
+    vector<int> usednum(6, 0);
+    int i = nums.size() - 1;
+    while(i>=0)
+    {
+        usednum[i] = amount / coins[i];
+        if(usednum[i] > nums[i])
+        {
+            usednum[i] = nums[i];
+            
+        }
+        nums[i] -= usednum[i];
+        usednum[5] += usednum[i];
+        amount = amount - usednum[i] * coins[i];
+        i--;
+    }
+
+    return usednum[5];
+}
+
+
 int main()
 {
     vector<int> price = {1, 3, 7, 11, 13};
     vector<int> nums = {1, 2, 3, 4, 5};
     int amount = 30;
 
-    int res = findcoins(price, nums, amount);
-
+    //int res = findcoins(price, nums, amount);
+    int res = findcoinsT(price, nums, amount);
     return 0;
 }
