@@ -4,24 +4,50 @@ using namespace std;
 #define TMAX 99999;
 
 
-int DpTSP(G)
+void DSP(vector<vector<int>> &dp,int s,int V, vector<vector<int>> &G)
+{
+    if(V == 0)
+    {
+        dp[1][0] = G[1][0];
+        dp[2][0] = G[2][0];
+        dp[3][0] = G[3][0]; 
+    }
+    else{
+        while(V>>1 != 0)
+        {
+            dp[0][Hvol] = min(
+
+            );
+        }
+    }
+    dp[]
+
+}
+
+
+int DpTSP(vector<vector<int>> &G,int N)
 {
     int res = TMAX;
-    int Hvol = 1 << G.size();
-    vector<vector<int>> dp(4,vector<int>(4,Hvol));
+    int Hvol = 1 << G.size(); //4个点 就是8
+    vector<vector<int>> dp(4,vector<int>(Hvol,TMAX));
 
     //自下而上
+    dp[0][0] = G[0][0];
     dp[1][0] = G[1][0];
     dp[2][0] = G[2][0];
     dp[3][0] = G[3][0];
-    
-    for (int i = 0; i < Hvol;i<<1)
+
+    for (int i = 0; i < Hvol;i++) //遍历所有
     {
-        dp[0]
+        for (int j = 0; j < N;j++)
+        {
+            dp[][]
+        }
     }
-         dp[][]
+         
 
 }
+
 
 
 int main()

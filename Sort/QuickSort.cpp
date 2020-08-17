@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 // void quickSort(int s[], int l, int r);
 void swapd(int &a,int &b) //拷贝和指针 引用
