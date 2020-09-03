@@ -11,21 +11,20 @@ int main()
     getline(cin, strl);
     int K;
     cin >> K;
-    //vector<int> data;
-    map<int, int> idnex;
-    for (int i = 0; i < strl.size();i++)
+    //依次比较相邻两位 左边大就删掉 
+    // 如果不够的话，剩下的就删掉末尾的几个
+    int i = 0;
+    for (; i < strl.size()||K>=0;K--)
     {
-        int temp = strl[i] - '0';
-        if(idnex.count(temp) ==0)//如果不存在
-            idnex.insert(make_pair(temp, i));
-        //data.push_back(temp);
+        if (strl[i]>strl[i+1] )
+        {
+            strl.erase(i, 1);
+            i--;
+        }else
+        {
+            i++;
+                }
     }
-    map<int, int>::iterator iter = idnex.end();
-    for (int i = 0; i < K;i++,iter--)
-    {
-        strl =  strl.substr(iter->second, 1);
-    }
-    cout << strl << endl;
     // process
 
 

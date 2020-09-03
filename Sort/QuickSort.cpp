@@ -12,7 +12,8 @@ void swapd(int &a,int &b) //拷贝和指针 引用
 void quickSort(int arr[], int low, int high); //访问数组都是访问 不是拷贝
 void quickSortv(vector<int> &ss, int low, int high)
 {
-	if (high <= low) return;
+	if (high <= low) 
+        return;
     int i = low;
     int j = high+1 ;
     int key = ss[low];//基准为low
@@ -32,7 +33,8 @@ void quickSortv(vector<int> &ss, int low, int high)
                 break;
             }
         }
-        if (i >= j) break;
+        if (i >= j) 
+            break;
         /*交换i,j对应的值*/
 		int temp = ss[i];
 		ss[i] = ss[j];
@@ -80,7 +82,7 @@ void quickSort(int arr[], int low, int high)
         while (arr[--j] > key)
         {
             if (j == low){
-                break;
+                break;   
             }
         }
         if (i >= j) break;

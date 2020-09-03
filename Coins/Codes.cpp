@@ -6,7 +6,7 @@ using namespace std;
 //自下而上
 int dp(vector<int> &coins,int amount)
 {
-    coins.erase(0);
+    //coins.erase(0);
 }
 int findcoins2(vector<int> &coins,int amount)
 { 
@@ -20,9 +20,10 @@ int findcoins2(vector<int> &coins,int amount)
 
      vector<int> dp(amount + 1,9999);
      dp[0] = 0;
-     for (int i = 0; i <= amount;i++)
+     for (int i = 0; i <= amount;i++) //类似背包问题 for i to amount 类似于容量
      {
-         for (int j = 0; j < coins.size();j++)
+         for (int j = 0; j < coins.size();j++) // x循环 所有的硬币 类似于 背包 
+         // 与背包不同的就是 循环方式
          {
              if(i>=coins[j])
              {

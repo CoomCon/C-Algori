@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
 typedef struct ListNode {
@@ -32,8 +32,6 @@ void adddataFront(int a)
     g_pHead = ptemp;
 
 }
-
-
 
 
 //尾插法
@@ -105,100 +103,73 @@ pListNode reverseK(pListNode head, int k)
 
     return ret; //返回当前区域的头结点
 }
-
-
-//点（.）是用于结构体变量访问成员，
-//箭头（->）是用于结构体指针访问成员。
-// 该cpp中创建的都是指针 都用箭头
-bool ListInter(pListNode a,pListNode b)
-{
-// 参考
-// 作者：reals
-// 链接：https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/tu-jie-xiang-jiao-lian-biao-by-user7208t/
-// 来源：力扣（LeetCode）
-// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-    
-    if (a == NULL || b == NULL) return NULL;
-    pListNode pA = a, pB = b;
-    while (pA != pB) {
-        pA = pA == NULL ? b : pA->next;
-        pB = pB == NULL ? a : pB->next;
-    }
-    return pA; //不想交返回NULL
-}
-
-
-
-
-
-/*************************************************************************************
- * 
- * 
- * 
- * ***********************************************************************************/
-
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
 class Solution {
 public:
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        if(l1 == NULL || l2 == NULL)
-            return NULL;
-        int tempadd = 0;
-        int tempmod = 0;
-
-        while(l1 != NULL && l2 != NULL )
-        {
-            //addvalue(l1->val + l2->val);
-            tempmod = tempadd + l1->data + l2->data;
-            tempadd = tempmod/10;
-            tempmod = tempmod % 10;
-            addvalue(tempmod);
-            l1=l1->next;
-            l2=l2->next;
-        }
-        if(l1 == NULL && l2 != NULL)
-        {
-            tempmod = tempadd + l2->data;
-            tempadd = tempmod/10;
-            tempmod = tempmod % 10;
-            addvalue(tempmod);
-            l2=l2->next;
-        }else if(l2 == NULL && l1 != NULL)
-        {
-            tempmod = tempadd + l1->data ;
-            tempadd = tempmod/10;
-            tempmod = tempmod % 10;
-            addvalue(tempmod);
-            l1=l1->next;
-        }else if(l2 == NULL && l1 == NULL)
-        {
-            if(tempadd)  
-            addvalue(tempmod);
-        }
-
-
-        return gp_head;
-        
-    }
-
-    ListNode* gp_head = NULL,*gp_end = NULL;
-
-    void addvalue(int n )
+    ListNode* reverseBetween(ListNode* head, int m, int n) 
     {
-        ListNode* temp = (ListNode*) malloc(sizeof(ListNode*));
-        temp->data = n;
-        temp->next = NULL;
-        if(gp_head == NULL)
+        if(!head)
+            return head;
+        
+        ListNode* gphead = head,* gpre = NULL;
+        ListNode* gend = head, * gnext = head->next;
+        int i=1;
+        
+        while(i != m)
         {
-            gp_head = temp;
-            gp_end = temp;
+            gpre = gphead;
+            gphead= gphead->next;
+            i++;
         }
+        gend = gphead;
+        while(i!=n)
+        {
+            gend = gend->next;
+            i++;
+        }
+        gnext = gend->next;
+
+        gend->next = NULL;
+
+        if(m!=1)
+            gpre->next = reverse21(gphead); //尾和头相连
         else
-        {
-            gp_end->next= temp;
-            gp_end = gp_end->next;
-        }
+            head = reverse21(gphead); //尾和头相连
+        gphead->next = gnext;
+
+        //连接
+        return head;
     }
 
+    //head开始
+    ListNode* reverse21(ListNode* head)
+    {
+
+        ListNode* pre,*now,*next;
+        pre = NULL;
+        now = head;
+
+        next = head->next;
+        while(now->next)
+        {
+            //指向更新
+            now->next = pre;
+            
+            pre = now;
+            now = next;
+            next = now ->next;
+        }
+
+        now->next = pre;
+        return now;
+    }
 
 };
 
@@ -207,18 +178,16 @@ int main()
     g_pHead;
 	 adddataFront(1);
 	 adddataFront(2);
-	 adddataFront(3);
-	 adddataFront(4);
-     adddataFront(5);
-     adddataFront(6);
+	 //adddataFront(3);
+	 //adddataFront(4);
+     //adddataFront(5);
+     //adddataFront(6);
     // pListNode ret =  reverse(g_pHead);
+     Solution so;
+     so.reverseBetween(g_pHead, 1, 2);
      //pListNode reret = reverseK( g_pHead, 3);
      //Solution so;
      //so.reverseKGroup(g_pHead, 2);
-     Solution so;
-     cout << so.addTwoNumbers(g_pHead, g_pHead) << endl;
-
-     return 0;
 }
 
 
