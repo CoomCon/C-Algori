@@ -10,6 +10,8 @@
     "code-runner.executorMap": {
         "c": "cd $dir && gcc '$fileName' -o '$fileNameWithoutExt.exe' -m32 -Wall -g -O2 -static-libgcc -std=c11 -fexec-charset=GBK && &'$dir$fileNameWithoutExt'",
         "cpp": "cd $dir && g++ '$fileName' -o '$fileNameWithoutExt.exe' -m32 -Wall -g -O2 -static-libgcc -std=c++11 -fexec-charset=GBK && &'$dir$fileNameWithoutExt'"
+
+        //"cpp": "cd $dir && g++ '$fileName' -o '$fileNameWithoutExt.exe' -lpthread -m32 -Wall -g -O2 -static-libgcc -std=c++11 -fexec-charset=GBK && &'$dir$fileNameWithoutExt'"
         //"c": "cd $dir && gcc '$fileName' -o '$fileNameWithoutExt.exe' -m64 -Wall -g -O2 -static-libgcc -std=c11 -fexec-charset=GBK && &'$dir$fileNameWithoutExt'",
         //"cpp": "cd $dir && g++ '$fileName' -o '$fileNameWithoutExt.exe' -m64 -Wall -g -O2 -static-libgcc -std=c++11 -fexec-charset=GBK && &'$dir$fileNameWithoutExt'"
         // "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt.exe -Wall -g -O2 -static-libgcc -std=c11 -fexec-charset=GBK && $dir$fileNameWithoutExt",

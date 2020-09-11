@@ -11,7 +11,8 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"//,
+                //"-lpthread"
             ],
             "options": {
                 "cwd": "D:\\mingw\\bin"

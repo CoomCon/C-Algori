@@ -6,7 +6,6 @@
 using namespace std;
 
 const int N = 1010;
-// 全局变量 定义到堆里面 堆里面会自动初始化为0
 //const int N = 1000;
 int f[N][N];
 int v[N], w[N];
